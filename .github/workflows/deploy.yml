@@ -2,7 +2,7 @@ name: 部署到GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # 当推送到main分支时触发
+    branches: [ master ]  # 当推送到main分支时触发
   workflow_dispatch:    # 允许手动触发工作流
 
 jobs:
