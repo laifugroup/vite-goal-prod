@@ -9,22 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-{
-  "name": "vite-goal-prod",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-{
-  "name": "vite-goal-prod",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@radix-ui/react-accordion": "^1.2.11",
