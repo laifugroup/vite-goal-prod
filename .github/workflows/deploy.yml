@@ -1,0 +1,36 @@
+name: 部署到GitHub Pages
+
+on:
+  push:
+    branches: [ main ]  # 当推送到main分支时触发
+  workflow_dispatch:    # 允许手动触发工作流
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置Node.js环境
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 设置环境变量
+        run: |
+          echo "VITE_BMOB_APPLICATION_ID=${{ secrets.VITE_BMOB_APPLICATION_ID }}" >> .env
+          echo "VITE_BMOB_REST_API_KEY=${{ secrets.VITE_BMOB_REST_API_KEY }}" >> .env
+
+      - name: 构建项目
+        run: npm run build
+
+      - name: 部署到GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist  # 构建输出目录
+          branch: gh-pages  # 部署到的分支
