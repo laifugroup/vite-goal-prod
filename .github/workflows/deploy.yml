@@ -2,7 +2,7 @@ name: 部署到GitHub Pages
 
 on:
   push:
-    branches: [ master ]  # 当推送到main分支时触发
+    branches: [ main, master ]  # 当推送到main或master分支时触发
   workflow_dispatch:    # 允许手动触发工作流
 
 jobs:
@@ -15,11 +15,17 @@ jobs:
       - name: 设置Node.js环境
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'npm'
 
       - name: 安装依赖
         run: npm ci
+
+      - name: 设置Node.js polyfill
+        run: |
+          npm install --save-dev crypto-browserify
+          echo "export const crypto = require('crypto');" > crypto-polyfill.js
+          echo "NODE_OPTIONS=--require ./crypto-polyfill.js" >> $GITHUB_ENV
 
       - name: 设置环境变量
         run: |
