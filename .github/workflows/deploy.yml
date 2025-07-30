@@ -40,3 +40,4 @@ jobs:
         with:
           folder: dist  # 构建输出目录
           branch: gh-pages  # 部署到的分支
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub提供的令牌
